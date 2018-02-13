@@ -10,4 +10,8 @@ class ServerTest < Minitest::Test
     assert_instance_of Server, server
   end
 
+  def test_
+
+  end
+
 end
