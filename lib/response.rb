@@ -1,8 +1,10 @@
-require 'sever'
-
+require 
 class Response
-  def response
-    request_line
-  end
 
+
+
+  def parser
+
+
+  end
 end

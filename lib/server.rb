@@ -1,25 +1,27 @@
 require 'socket'
-require 'faraday'
+# require 'faraday'
 require './lib/response'
+require 'pry'
 
 class Server
+  attr_reader :request_lines,
+              :client
+
+  def initalize
+    @request_lines = []
+  end
 
   def start_server
-    tcp_server = TCPServer.new(9292)
-    counter = 0
+    @request_lines = []
+    server = TCPServer.new(9292)
     loop do
-        puts "Ready for request:"
-        client = tcp_server.accept
-        request = store_request(client)
-
-      client.gets
-      output  = "Hello World!(#{counter})"
-      headers = ["http/1.1 200 ok",
-                "content-length: #{output.length}\r\n\r\n"].join("\r\n")
-      client.puts headers
-      client.puts output
-      counter += 1
-      client.close
+      parser = Parser.new(@request_lines)
+      client = server.accept
+    while line = client.gets and !line.chomp.empty?
+      @request_lines << line
+    end
+    binding.pry
+    client.close
     end
   end
 end
