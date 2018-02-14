@@ -1,12 +1,17 @@
 require 'socket'
 require 'faraday'
+require './lib/response'
 
 class Server
 
   def start_server
     tcp_server = TCPServer.new(9292)
     counter = 0
-    loop do client = tcp_server.accept
+    loop do
+        puts "Ready for request:"
+        client = tcp_server.accept
+        request = store_request(client)
+
       client.gets
       output  = "Hello World!(#{counter})"
       headers = ["http/1.1 200 ok",
