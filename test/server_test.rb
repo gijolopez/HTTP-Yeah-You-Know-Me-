@@ -5,16 +5,15 @@ require './lib/server'
 class ServerTest < Minitest::Test
 
   def test_it_exist
-#    server = Server.new
+    server = Server.new
 
-    #assert_instance_of Server, server
+    assert_instance_of Server, server
   end
 
   def test_listens_to_port_9292
-  #  server = Server.new
-    # server.start_server
     response = Faraday.get "http://127.0.0.1:9292"
-    # assert_equal start_server, server.start_server
+    
+    assert_equal "<html><head></head><body><pre>\nVerb: GET\nPath: /\nProtocol: HTTP/1.1\nHost: Faraday\nPort: \nOrign: Faraday\nAccept: */*\n</pre></body></html>" , response.body
   end
 
   def test_respond_to_http_request
