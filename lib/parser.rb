@@ -1,3 +1,4 @@
+require 'pry'
 class Parser
   attr_reader :request_lines
 
@@ -11,6 +12,7 @@ class Parser
 
   def path
     @request_lines[0].split[1].split("?")[0]
+    binding.pry
   end
 
   def protocol
@@ -24,6 +26,9 @@ class Parser
   def port
     @request_lines[1].split(":")[2].strip
   end
+
+  # def origin
+  # end
 
   def accept
     accept_line = @request_lines.find do |line|

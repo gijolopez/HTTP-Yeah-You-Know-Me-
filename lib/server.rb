@@ -4,7 +4,7 @@ require './lib/parser'
 require 'pry'
 
 class Server
-  attr_reader :request_lines, :client
+  attr_reader :request_lines
 
   def initalize
     @request_lines = []
@@ -13,15 +13,15 @@ class Server
   def start_server
     @request_lines = []
     server = TCPServer.new(9292)
-    parser = Parser.new(@request_lines)
     requests = 0
     loop do
       puts "Ready for request:"
       client = server.accept
-      request = store_request(client)
+      store_request(client)
       requests += 1
-      end
-    @client.close
+      parser = Parser.new(@request_lines)
+      client.close
+    end
   end
 
   def store_request(client)
