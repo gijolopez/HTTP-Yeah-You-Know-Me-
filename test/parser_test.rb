@@ -30,4 +30,25 @@ class ParserTest < Minitest::Test
     assert_equal "GET", @parser.verb
   end
 
+  def test_path
+    assert_equal "/", @parser.path
+  end
+
+  def test_protocol
+    assert_equal "HTTP/1.1", @parser.protocol
+  end
+
+  def test_host
+    assert_equal "localhost", @parser.host
+  end
+
+  def test_port
+    assert_equal "9292", @parser.port
+  end
+
+  def test_accept
+    expected = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
+    assert_equal expected, @parser.accept
+  end
+
 end
