@@ -12,7 +12,7 @@ class Server
   end
 
   def start_server
-     @request_lines = []
+    @request_lines = []
     server = TCPServer.new(9292)
     requests = 0
     loop do
@@ -39,6 +39,4 @@ class Server
     body = parser.diagnostics
     response.total_response(body)
   end
-
-  
 end
