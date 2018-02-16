@@ -1,6 +1,7 @@
 require 'socket'
 require 'faraday'
 require './lib/parser'
+require './lib/response'
 require 'pry'
 
 class Server
@@ -11,15 +12,17 @@ class Server
   end
 
   def start_server
-    @request_lines = []
+     @request_lines = []
     server = TCPServer.new(9292)
     requests = 0
     loop do
       puts "Ready for request:"
       client = server.accept
       store_request(client)
+      response = get_response
+      client.puts response
       requests += 1
-      parser = Parser.new(@request_lines)
+      puts @request_lines
       client.close
     end
   end
@@ -29,4 +32,13 @@ class Server
       @request_lines << line
     end
   end
+
+  def get_response
+    parser = Parser.new(@request_lines)
+    response = Response.new
+    body = parser.diagnostics
+    response.total_response(body)
+  end
+
+  
 end
