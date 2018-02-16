@@ -19,7 +19,7 @@ class ParserTest < Minitest::Test
   end
 
   def test_it_exist
-    assert_instance_of Parser, @parser
+    assert_instance_ofs Parser, @parser
   end
 
   def test_output_of_request_lines
