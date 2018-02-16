@@ -19,7 +19,7 @@ class ParserTest < Minitest::Test
   end
 
   def test_it_exist
-    assert_instance_ofs Parser, @parser
+    assert_instance_of Parser, @parser
   end
 
   def test_output_of_request_lines
@@ -49,6 +49,26 @@ class ParserTest < Minitest::Test
   def test_accept
     expected = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"
     assert_equal expected, @parser.accept
+  end
+
+  def test_test_diagnostic_output
+    skip
+    expected =
+    " Verb: GET
+
+    Path: /\r
+
+    Protocol: HTTP/1.1\r
+
+    Host: localhost\r
+
+    Port: 9292\r
+
+    Origin: 127.0.0.1\r
+
+    Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8\r"
+    assert_equal expected, @parser.diagnostics
+
   end
 
 end

@@ -3,7 +3,6 @@ class Response
 
   def initialize
     @hellos = -1
-      # @game = game
   end
 
   def hello
@@ -16,7 +15,7 @@ class Response
   end
 
   def headers(length)
-    headers = ["http/1.1 200 ok",
+    headers = [CODES[code],
       "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",
       "server: ruby",
       "content-type: text/html; charset=iso-8859-1",
@@ -26,4 +25,5 @@ class Response
   def total_response(body)
     headers(body.length)+ body
   end
+
 end
