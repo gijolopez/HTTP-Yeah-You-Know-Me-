@@ -11,7 +11,7 @@ class Parser
   end
 
   def path
-    @request_lines[0].split[1].split("?")[0]
+    @request_lines[0].split[1]
   end
 
   def protocol
@@ -35,14 +35,14 @@ class Parser
 
   def diagnostics
     "<pre>
-        Verb: #{verb}\r\n
-        Path: #{path}\r\n
-        Protocol:#{protocol}\r\n
-        Host:#{host}\r\n
-        Port:#{port}\r\n
-        Origin: 127.0.0.1
-        Accept:#{accept}\r\n
-      </pre>"
+    Verb: #{verb}\r\n
+    Path: #{path}\r\n
+    Protocol: #{protocol}\r\n
+    Host: #{host}\r\n
+    Port: #{port}\r\n
+    Origin: 127.0.0.1\r\n
+    Accept: #{accept}\r\n
+    </pre>"
   end
 
 end
